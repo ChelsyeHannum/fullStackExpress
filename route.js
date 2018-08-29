@@ -26,16 +26,16 @@ cartItems.get("/cart-items", (req, res) => {
     res.send(shoppingList);
 });
 
-shoes.post("/cart-items", (req, res) => {
+cartItems.post("/cart-items", (req, res) => {
     console.log(req.body);
 })
 
-shoes.put("/cart-items/_ID_", (req, res) => {
-    console.log(req.param.id.body);
+cartItems.put("/cart-items/_ID_", (req, res) => {
+    console.log(req.param.id + '' + req.body);
 })
 
-shoes.delete("/cart-items/_ID_", (req, res) => {
-    console.log(req.param.id);
+cartItems.delete("/cart-items/_ID_", (req, res) => {
+    console.log(req.param.id + '' + req.body);
 })
 
-module.exports = routes;
+module.exports = cartItems;

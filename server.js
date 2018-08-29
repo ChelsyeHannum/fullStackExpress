@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const routes = require("./routes");
+const routes = require("./route");
 
 app.use(express.json());
 app.use(express.static("./public"));

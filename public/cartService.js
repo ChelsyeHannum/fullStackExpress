@@ -4,10 +4,11 @@ function CartService($http) {
     const vm = this;
     vm.getAllItems = () => {
         return $http({
-            url: "/items/all",
+            url: "/cart-items",
             method: "GET"
         }).then((response) => {
             vm.shoppingList = response.data;
+            console.log(vm.shoppingList);
             return vm.shoppingList;
         });
     };

@@ -2,11 +2,11 @@
 
 const shoppingCart = {
     template: `
-    <form ng-repeat="cart-items in $ctrl.shoppingList">
-    <p> Name: {{ cart-items.product }}</p>
-    <p> Type: {{ cart-items.price }}</p>
-    <p> Health: {{ cart-items.quantity }}</p>
-    <p> ID: {{ cart-items.id }}</p>
+    <form ng-repeat="cartItems in $ctrl.shoppingList">
+    <p> Product: {{ cartItems.product }}</p>
+    <p> Price: {{ cartItems.price }}</p>
+    <p> Quantity: {{ cartItems.quantity }}</p>
+    <p> ID: {{ cartItems.id }}</p>
     <form>
     `,
     controller: ["CartService", function(CartService) {
