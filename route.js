@@ -22,8 +22,20 @@ const shoppingList = [{
 
 let idCount = shoppingList.length;
 
-cartItems.get("/routes", (req, res) => {
+cartItems.get("/cart-items", (req, res) => {
     res.send(shoppingList);
 });
+
+shoes.post("/cart-items", (req, res) => {
+    console.log(req.body);
+})
+
+shoes.put("/cart-items/_ID_", (req, res) => {
+    console.log(req.param.id.body);
+})
+
+shoes.delete("/cart-items/_ID_", (req, res) => {
+    console.log(req.param.id);
+})
 
 module.exports = routes;
