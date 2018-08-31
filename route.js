@@ -1,41 +1,40 @@
 "use strict";
-
 const express = require("express");
-const cartItems = express.Router();
+const list = express.Router();
+const pool = require("./pg-connection-pool");
 
-const shoppingList = [{
-    id: 0,
-    product: "Banana",
-    price: 2,
-    quantity: 5
-}, {
-    id: 1,
-    product: "Cereal",
-    price: 5,
-    quantity: 3
-}, {
-    id: 2,
-    product: "Chicken",
-    price: 10,
-    quantity: 2
-}];
-
-let idCount = shoppingList.length;
-
-cartItems.get("/cart-items", (req, res) => {
-    res.send(shoppingList);
+list.get("/cart-items", (req, res) => {
+    pool.query("Select * From ShoppingCart").then((results) => {
+        console.log(results.rows);
+        res.send(results.rows);
+    });
 });
 
-cartItems.post("/cart-items", (req, res) => {
-    console.log(req.body);
-})
+list.post("/cart-items", (req, res) => {
+    pool.query("Insert Into ShoppingCart (product, price, quantity) Values($1::text, $2::float, $3::int)", [req.body.product, req.body.price, req.body.quantity]).then(() => {
+        pool.query("Select * From ShoppingCart").then((results) => {
+            console.log(results.rows);
+            res.send(results.rows);
+        });
+    });
+});
 
-cartItems.put("/cart-items/_ID_", (req, res) => {
-    console.log(req.param.id + '' + req.body);
-})
+list.put("/cart-items/:id", (req, res) => {
+    pool.query("Update ShoppingCart set quantity=$1::int Where id=$2::int", [req.body.quantity, parseInt(req.params.id)]).then(() => {
+        pool.query("Select * From ShoppingCart").then((results) => {
+            console.log(results.rows);
+            res.send(results.rows);
+        });
+    });
+});
 
-cartItems.delete("/cart-items/_ID_", (req, res) => {
-    console.log(req.param.id + '' + req.body);
-})
+list.delete("/cart-items/:id", (req, res) => {
+    pool.query("Delete From ShoppingCart Where id=$1::int", [parseInt(req.params.id)]).then(() => {
+        pool.query("Select * From ShoppingCart").then((results) => {
+            console.log(results.rows);
+            res.send(results.rows);
+        });
+    });
+});
 
-module.exports = cartItems;
+module.exports = list;

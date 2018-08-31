@@ -1,0 +1,33 @@
+.cart {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listItem {
+    background: aliceblue;
+    height: 250px;
+    width: 250px;
+    font-size: 25px;
+    margin: 15px;
+    border-radius: 5px;
+    display: flex;
+}
+
+.items {
+    margin: 15px;
+}
+
+button {
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+.input {
+    display: flex;
+}
+
+input {
+    height: 20px;
+    margin: 10px;
+    display: flex;
+}
